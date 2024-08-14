@@ -32,6 +32,6 @@ def spike_removal(y, width_threshold, prominence_threshold, moving_average_windo
         if spike:
             window = np.arange(max(i - moving_average_window, 0), min(i + moving_average_window + 1, len(y)))
             window_exclude_spikes = window[spikes[window] == 0]
-            interpolator = interpolate.interp1d(window_exclude_spikes, y[window_exclude_spikes], kind=interp_kind)
+            interpolator = interpolate.interp1d(window_exclude_spikes, y[window_exclude_spikes], kind=interp_kind, fill_value="extrapolate")
             y_out[i] = interpolator(i)
     return y_out
